@@ -1,0 +1,396 @@
+@font-face {
+    font-family: NotoSerifDisplay-Bold; /* Гарнитура шрифта */
+    src: url(fonts/NotoSerifDisplay-Bold.ttf) /* Путь к файлу со шрифтом */
+}
+
+body {
+    font-family: "Trebuchet MS", Verdana;
+    /*background-position: left bottom;*/
+    background-image: url(../img/patt3.png);
+    background-repeat: repeat;
+    background-size: 20%;
+    margin: 0px;
+    padding: 0px;
+    min-width: 1200px;
+    position: relative;
+    height:100%;
+    width:100%;
+}
+
+#wrapper {
+    max-width:1300px ;
+    margin: auto;
+    padding: 0;
+    width: 75%;
+    position: relative;
+}
+
+#header {
+    background-image: url(../img/HeaderBook.png);
+    background-size: 100% 100%;
+    margin: 0px 0px;
+    padding: 0px;
+    height:auto;
+    min-height:130px;
+    position: relative;
+}
+
+/*#header h1{
+    margin: auto 0 auto 0;
+    bottom: 16%;
+    color: rgba(51,102,153,1);
+    font-family: NotoSerifDisplay-Bold,"Comic Sans MS",TenorSans-Regular,"Trebuchet MS", Verdana;
+    font-size: 420%;
+    font-weight: 420;
+    width: 100%;
+    display: block;
+    position: absolute;
+}*/
+
+#mainMenu {
+    width: 100%;
+    color:rgba(0,0,0,1);
+    padding: 0px;
+    min-height: 40px;
+    text-align:center;
+    display: flex;
+    justify-content: center;
+    border: solid 1px lightblue;
+}
+
+.button {
+    width: 20%;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    vertical-align:bottom;
+    font: 137%/2.2 "Trebuchet MS", Verdana;
+    font-weight:400;
+}
+
+.button a {
+    background-color: rgba(255,204,0,1);
+    color:rgba(0,0,0,1);
+    display:block;
+    height:100%;
+    text-align:center;
+    text-decoration:none;
+    cursor:pointer;
+}
+
+.button a:hover{
+    box-shadow: 0px 6px rgba(150,150,150,1);
+    background-color: #FFF700;
+}
+
+#footer {
+    text-align:center;
+}
+
+#content{
+    border-radius:10px;
+    background-color: rgba(255,255,255,1);
+    vertical-align:top;
+    height: 100%;
+    min-height:700px;
+    width:90%;
+    padding-top:40px;
+    padding-bottom:20px;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin:15px auto 0 auto;
+}
+
+#content p{
+    font-family: "Trebuchet MS", Verdana;
+    font-size: 100%;
+    line-height: 170%;
+    text-align: justify;
+    text-indent: 40px;
+    margin-top: 0;
+}
+
+#content h2 {
+    text-align: center;
+    line-height: 170%;
+}
+
+/*Оформление таблиц с книгами*/
+#book_table{
+    border: 2px solid white;
+    border-spacing: 6px;
+    border-collapse: separate;
+}
+
+td {
+    min-width: 100px;
+    background: aquamarine;
+}
+
+#first_row {
+    background: lightpink;
+}
+
+.author_row {
+    background: lightblue;
+}
+
+.not_row {
+    background: none;
+    height: 5px;
+}
+
+td, th {
+    padding: 6px 10px 6px 10px;
+}
+/* Конец оформления таблиц*/
+
+/*Стили для кнопки отправки формы*/
+#ready {
+    font: 150% "Trebuchet MS", Tahoma, Verdana; 
+    background-color: rgba(255,204,0,1);
+    color: black;
+}
+
+#ready:hover {
+    background-color: #FFF700;
+    color: black;
+}
+/*Конец стилей для кнопки отправки формы*/
+
+#iam {
+    float: left;
+    width: 32%;
+    box-shadow: 0px 0px 5px 1px rgba(100,100,220,1);
+    margin: 0 30px 30px 0;
+}
+
+div.quotes{
+    padding: 20px;
+    margin: 10px 0 20px 0;
+    background: rgba(0,255,255,0.1);
+    box-shadow: 2px 2px 2px rgb(189, 222, 222);
+    border-radius: 15px;
+    font: 18px "Trebuchet MS", Tahoma, Verdana;
+    font-style: italic;
+    line-height: 150%;
+    text-indent: 0px;
+}
+
+/*Стиль имени автора и книги в цитатах:*/
+.source{ 
+    text-align: right !important;
+    font: 16px "Trebuchet MS", Tahoma, Verdana !important; 
+    font-style: italic !important;
+}
+/*End*/
+
+/*Цитаты из базы*/
+#content div.quotes p {
+    margin:0;
+}
+/*End*/
+
+/*Радиокнопки в списке выбора жанра*/
+#content ul li{
+    font: 100% "Trebuchet MS", Tahoma, Verdana; 
+    list-style-type: none;
+    margin: 8px 0;
+}
+
+#content ul label, input[type="radio"]{
+    cursor: pointer;
+    padding: 8px;
+}
+
+#content ul label:hover{
+    background-color: lightblue;
+    border-radius: 5px;
+}
+/*End*/
+
+/*Фото внутри публикаций*/
+.imgPublications {
+    width: 40%;
+    height: auto;
+    float: right;
+    box-shadow: 0px 0px 5px 1px rgba(100,100,220,1);
+    margin: 0 0 8px 20px;
+}
+
+/*Обзоры*/
+.imgReviews {
+    width: 25%;
+    height: auto;
+    float: left;
+    box-shadow: 0px 0px 5px 1px rgba(100,100,220,1);
+    margin: 0 20px 20px 0;
+}
+
+.title{
+    margin: 0 10% 0 10%;
+    text-align: center;
+}
+
+.author {
+    text-align: right; 
+    display: block !important;
+}
+
+.datestamp {
+    display: block !important;
+    text-align: right !important;
+    clear: both !important;
+}
+
+.liked-disliked{
+    display: flex;
+    justify-content: flex-start;
+}
+
+ul.disliked {
+    /*list-style-image: url(../img/minus.png);*/
+    display: block;
+    width: 50%;
+}
+
+ul.disliked li {
+    background: url(../img/minus.png) no-repeat left top;
+    list-style-type: none;
+    padding-left: 25px;
+}
+
+ul.liked {
+    /*    list-style-image: url(../img/plus.png);*/
+    display: block;
+    width: 50%;
+}
+
+ul.liked li {
+    background: url(../img/plus.png) no-repeat left top;
+    list-style-type: none;
+    padding-left: 25px;
+}
+
+.stars {
+    margin: 0;
+}
+
+/*Форма обратной связи*/
+#feedback_block{
+    width: 50%;
+    float: left;
+    padding-top: 30px;
+}
+
+#quill_block{
+    width: 45%;
+    float: right;
+    padding-top: 30px;
+}
+#wrap_recaptha_and_button {
+    width: 100%;
+    padding: 0px;
+    text-align:center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+/*Блок с reCAPTCHA*/
+.g-recaptcha {
+    margin-bottom: 8px;
+}
+
+.feedback_elem label {
+    display: block;
+    margin-top: 10px;
+}
+
+.feedback_elem input {
+    display: block;
+}
+
+.feedback_elem input, textarea {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 8px;
+    border: 2px solid lightgray;
+    border-radius: 10px;
+    font: 100% "Trebuchet MS", Tahoma, Verdana; 
+}
+
+.feedback_elem input[type=text]:focus,
+textarea:focus{
+    outline: none;
+    border: 2px solid gray;
+    border-radius: 10px;
+}    
+textarea {
+    width: calc(100% - 18px);
+    resize: none;
+}
+
+#feedback_button {
+    height: 100%;
+    vertical-align:bottom;
+}
+
+#subj {
+    box-sizing: border-box;
+    width: 100%;
+}
+/*End*/
+
+/*Кнопки на сайте*/
+.form_button {
+    display: block;
+    padding: 10px 20px !important;
+    border-radius: 10px;
+    font: 120% "Trebuchet MS", Tahoma, Verdana !important ;
+    background-color: #6bdb96;
+    min-width: 50px;
+    min-height: 40px;
+    border: none;
+    cursor:pointer;
+}
+
+.form_button:hover {
+    background-color: #77f7a8;
+}
+/*End*/
+
+/*Оформление страницы 404*/
+
+#div_404{
+    margin-top: 60px; 
+}
+
+#num_404 {
+    text-indent: 0px !important;
+    text-align: center !important;
+    display: block;
+    margin: 0px auto 0px auto;
+    font: 1000% "Trebuchet MS", Tahoma, Verdana !important ;
+    color: #187951;
+}
+
+#text_under_404 {
+    text-indent: 0px !important;
+    text-align: center !important;
+    display: block;
+    margin: 0px auto 0px auto;
+    font: 400% "Trebuchet MS", Tahoma, Verdana !important ;
+    font-style: italic !important;
+    color: #187951;
+}
+
+/*Заголовки на страницах*/
+#hello_wtr_result{
+
+}
+
+#hello {
+    text-align: center;
+    line-height: 150% !important;
+}
