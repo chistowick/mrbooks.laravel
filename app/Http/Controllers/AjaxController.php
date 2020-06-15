@@ -71,9 +71,47 @@ class AjaxController extends Controller {
     // Отправка письма с информацией из формы обратной связи
     public function sendFeedbackEmail(Request $request) {
 
-        Mail::to('chistowick@yandex.ru')->send(new Feedback($request));
+        // If at least one parameter does not exist
+        if ((env('RECAPTCHA_SECRET') !== NULL)
+                AND ( $request->recaptchaToken !== NULL)) {
 
-        echo 'true';
+            $secret = env('RECAPTCHA_SECRET');
+            $client_token = $request->recaptchaToken;
+
+            $url = 'https://www.google.com/recaptcha/api/siteverify';
+
+            $post_fields = array(
+                'secret' => $secret,
+                'response' => $client_token,
+            );
+            // Open curl session
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // TRUE для возврата результата в качестве строки
+            curl_setopt($ch, CURLOPT_POST, true); // TRUE для использования обычного HTTP POST
+            curl_setopt($ch, CURLOPT_URL, $url); // Загружаемый URL
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $post_fields); // Все данные, передаваемые в HTTP POST-запросе
+            // Writing the json response
+            $response_json = curl_exec($ch);
+
+            // Close curl session
+            curl_close($ch);
+
+            // Decoding json to object
+            $response = json_decode($response_json);
+
+            // If the server has confirmed the authenticity of the token, send an email 
+            // and inform the js-client about it
+            if ($response->success == TRUE) {
+
+                Mail::to('chistowick@yandex.ru')->send(new Feedback($request));
+                echo 'true';
+            } else {
+                echo 'false'; // Если google не подтвердил токен
+            }
+        } else {
+            echo 'false'; // Если токен или секретный ключ пуст
+        }
     }
 
 }
