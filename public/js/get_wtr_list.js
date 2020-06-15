@@ -11,7 +11,7 @@ function getWtrList() {
     let idGenre = getCheckedRadioValue();
 
     // Setting URL and encoding GET-parameters
-    let url = new URL('http://mrbooks.laravel/what-to-read/ajax');
+    let url = new URL('https://mrbooks.ru/what-to-read/ajax');
     url.searchParams.set('id_genre', idGenre);
 
     // Create a connection

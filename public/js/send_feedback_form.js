@@ -10,25 +10,26 @@ function sendFeedbackForm() {
 
     let subj = document.querySelector('#subj').value;
     let textArea = document.querySelector('#textArea').value;
-//    let token = grecaptcha.getResponse();
+    let recaptchaToken = grecaptcha.getResponse();
+    
     // Получаем защитный токен Laravel из скрытого input
     let laravelToken = document.querySelector('input[name="_token"]').value;
 
     // Checking the token and form fields
-    let ready = readinessCheck(subj, textArea);
+    let ready = readinessCheck(subj, textArea, recaptchaToken);
 
     // If something is wrong - interrupt
     if (ready === false) {
         return;
     }
 
-    let url = 'http://mrbooks.laravel/contacts/ajax';
+    let url = 'https://mrbooks.ru/contacts/ajax';
 
     // Create POST request data
     let postData = new FormData();
     postData.append('subj', subj);
     postData.append('textArea', textArea);
-//    postData.append('token', token);
+    postData.append('recaptchaToken', recaptchaToken);
     postData.append('_token', laravelToken);
 
     // Create a connection
@@ -68,9 +69,9 @@ function sendFeedbackForm() {
 }
 
 // Checking the token and form fields
-function readinessCheck(subj, textArea) {
+function readinessCheck(subj, textArea, recaptchaToken) {
 
-    if (subj && textArea) {
+    if (subj && textArea && recaptchaToken) {
         return true;
     }
 
@@ -79,7 +80,10 @@ function readinessCheck(subj, textArea) {
         return false;
     }
 
-
+    if (!recaptchaToken) {
+        alert('Подтвердите, что Вы не робот');
+        return false;
+    }
 
     return false;
 }

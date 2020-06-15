@@ -6,7 +6,7 @@ window.onload = setButtonsAction('.get_random_quotes', 'click', getRandomQuotes)
 // Requests and outputs a set of random quotes
 function getRandomQuotes() {
 
-    let url = 'http://mrbooks.laravel/quotes/ajax';
+    let url = 'https://mrbooks.ru/quotes/ajax';
 
     // Create a connection
     let request = new XMLHttpRequest();
