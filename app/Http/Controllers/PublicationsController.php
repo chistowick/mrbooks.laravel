@@ -25,6 +25,12 @@ class PublicationsController extends Controller
         
         $one_publication = Publication::find($id);
         
+        // Если публикация не найдена выбрасываем исключение на обработку
+        if(!$one_publication) {
+            abort(404);
+            return;
+        }
+        
         return view('one_publication', ['one_publication' => $one_publication]);
     }
 }
