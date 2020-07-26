@@ -23,7 +23,7 @@ function sendFeedbackForm() {
         return;
     }
 
-    let url = 'https://mrbooks.ru/contacts/ajax';
+    let url = 'http://mrbooks.laravel/contacts/ajax';
 
     // Create POST request data
     let postData = new FormData();
