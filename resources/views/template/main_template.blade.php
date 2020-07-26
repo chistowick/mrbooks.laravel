@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html>
-    <!--Top part of the main template-->
-    <head>
+<!--Top part of the main template-->
 
-        <!-- Yandex.Metrika counter -->
-        <script type="text/javascript" >
-            (function (m, e, t, r, i, k, a) {
-                m[i] = m[i] || function () {
-                    (m[i].a = m[i].a || []).push(arguments)
-                };
-                m[i].l = 1 * new Date();
-                k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
-            })
-                    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+<head>
 
-            ym(61775458, "init", {
-                clickmap: true,
-                trackLinks: true,
-                accurateTrackBounce: true,
-                webvisor: true
-            });
-        </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/61775458" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m, e, t, r, i, k, a) {
+            m[i] = m[i] || function() {
+                (m[i].a = m[i].a || []).push(arguments)
+            };
+            m[i].l = 1 * new Date();
+            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+        })
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(61775458, "init", {
+            clickmap: true,
+            trackLinks: true,
+            accurateTrackBounce: true,
+            webvisor: true
+        });
+    </script>
+    <noscript>
+        <div><img src="https://mc.yandex.ru/watch/61775458" style="position:absolute; left:-9999px;" alt="" /></div>
+    </noscript>
     <!-- /Yandex.Metrika counter -->
 
     <!--Строка для того, чтобы телефоны не увеличивали шрифт-->
@@ -34,9 +37,15 @@
 
     <title>Мой читательский дневник</title>
 
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <!-- Styles of Bootstrap-->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
     <!--Styles and favicon-->
-    <link href="{{asset('/css/style.css')}}" rel="stylesheet" type="text/css" />
-    <link rel="shortcut icon" href="{{asset('favicon.png')}}" type="image/png">
+    <link href="{{ asset('/css/style.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="{{ asset('favicon.png') }}" type="image/png">
     <!--End Styles-->
 
 </head>
@@ -54,28 +63,27 @@
             <div class="button"><a href="{{ route('contacts') }}">КОНТАКТЫ</a></div>
         </div>
 
-        <div id="content"><!--Start content-->
+        <div id="content">
+            <!--Start content-->
 
-            @yield('content') <!-- Имя включаемой секции -->
+            @yield('content')
+            <!-- Имя включаемой секции -->
 
             <!--Bottom part of the main template-->
-        </div><!--End content -->
-    </div><!--End wrapper -->
-    <div id="footer"><p id="copy">&copy; 2020 Анатолий Чиняев</p></div>
+        </div>
+        <!--End content -->
+    </div>
+    <!--End wrapper -->
+    <div id="footer">
+        <p id="copy">&copy; 2020 Анатолий Чиняев</p>
+    </div>
 
-    <?php
-// Include scripts in the following format 
-// <script src='path_to_script.js'></script> 
-    $scripts = isset($scripts) ? $scripts : false;
+    @hasSection('scripts')
 
-    if ($scripts) {
+    @yield('scripts')
 
-        foreach ($scripts as $script) {
-
-            echo $script;
-        }
-    }
-    ?>   
+    @endif
 
 </body>
+
 </html>

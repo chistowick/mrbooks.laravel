@@ -1,4 +1,5 @@
-@extends('template.main_template') <!--Расширяем главный шаблон-->
+@extends('template.main_template')
+<!--Расширяем главный шаблон-->
 <!--Content of the "what to read" page-->
 
 @section('content')
@@ -34,14 +35,10 @@
 </div>
 <div id="recommendations_list"></div>
 
-<!--scripts js-->
-<?php
-// Array of scripts to load in the main template
-$scripts = array(
-    "1" => "<script src='/js/get_wtr_list.js'></script>",
-);
-?><!--end scripts js-->
-
 <!--content end-->
 
+@endsection
+
+@section('scripts')
+<script src="{{ asset('js/get_wtr_list.js') }}"></script>
 @endsection
