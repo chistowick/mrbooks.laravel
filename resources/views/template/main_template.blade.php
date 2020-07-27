@@ -51,31 +51,44 @@
 </head>
 
 <body>
-    <div id="wrapper">
 
-        <div id="header"></div>
+    <div class="container-lg p-0">
 
-        <div id="mainMenu">
-            <div class="button"><a href="{{ route('publications-list') }}">СТАТЬИ</a></div>
-            <div class="button"><a href="{{ route('about-me') }}">О БЛОГЕ</a></div>
-            <div class="button"><a href="{{ route('what-to-read') }}">ЧТО ПОЧИТАТЬ</a></div>
-            <div class="button"><a href="{{ route('quotes') }}">ЦИТАТЫ</a></div>
-            <div class="button"><a href="{{ route('contacts') }}">КОНТАКТЫ</a></div>
+        <!-- Header -->
+        <div class="row no-gutters justify-content-center">
+            <div class="col col-md-11 col-lg-10">
+                <div id="header">
+                    <img src="{{ asset('img/HeaderBook.png') }}" alt="МОЙ ЧИТАТЕЛЬСКИЙ ДНЕВНИК">
+                </div>
+            </div>
         </div>
 
-        <div id="content">
-            <!--Start content-->
-
-            @yield('content')
-            <!-- Имя включаемой секции -->
-
-            <!--Bottom part of the main template-->
+        <!-- Menu -->
+        <div class="row no-gutters justify-content-center">
+            <div class="col-12 col-md-2 col-lg-2 button"><a href="{{ route('publications-list') }}">СТАТЬИ</a></div>
+            <div class="col-12 col-md-2 col-lg-2 button"><a href="{{ route('about-me') }}">О БЛОГЕ</a></div>
+            <div class="col-12 col-md-3 col-lg-2 button"><a href="{{ route('what-to-read') }}">ЧТО ПОЧИТАТЬ</a></div>
+            <div class="col-12 col-md-2 col-lg-2 button"><a href="{{ route('quotes') }}">ЦИТАТЫ</a></div>
+            <div class="col-12 col-md-2 col-lg-2 button"><a href="{{ route('contacts') }}">КОНТАКТЫ</a></div>
         </div>
-        <!--End content -->
-    </div>
-    <!--End wrapper -->
-    <div id="footer">
-        <p id="copy">&copy; 2020 Анатолий Чиняев</p>
+
+        <!-- Content area -->
+        <div class="row no-gutters justify-content-center">
+            <div class="col col-md-11 col-lg-10" id="content">
+
+                @yield('content')
+
+            </div>
+        </div>
+
+
+        <!-- Footer -->
+        <div class="row justify-content-center no-gutters">
+            <div class="col-8" id="footer">
+                <p id="copy">&copy; 2020 Анатолий Чиняев</p>
+            </div>
+        </div>
+
     </div>
 
     @hasSection('scripts')
