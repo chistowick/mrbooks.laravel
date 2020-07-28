@@ -21,9 +21,9 @@ class PublicationsController extends Controller
     /**
      * Метод для обработки запроса отдельной публикации
      */
-    public function getOneItem($id) {
+    public function getOneItem($name) {
         
-        $one_publication = Publication::find($id);
+        $one_publication = Publication::where('name', $name)->first();
         
         // Если публикация не найдена выбрасываем исключение на обработку
         if(!$one_publication) {
