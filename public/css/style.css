@@ -91,36 +91,6 @@ body {
     line-height: 170%;
 }
 
-/*Оформление таблиц с книгами*/
-/* #book_table{
-    border: 2px solid white;
-    border-spacing: 6px;
-    border-collapse: separate;
-}
-
-td {
-    min-width: 100px;
-    background: aquamarine;
-}
-
-#first_row {
-    background: lightpink;
-}
-
-.author_row {
-    background: lightblue;
-}
-
-.not_row {
-    background: none;
-    height: 5px;
-}
-
-td, th {
-    padding: 6px 10px 6px 10px;
-} */
-/* Конец оформления таблиц*/
-
 /*Стили для кнопки отправки формы*/
 #ready {
     font: 150% "Trebuchet MS", Tahoma, Verdana; 
