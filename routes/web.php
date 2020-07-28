@@ -20,16 +20,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'PublicationsController@getList')->name('publications-list');
 
 // Маршрут для страницы с отдельной публикацией
-Route::get('publications/{id}', 'PublicationsController@getOneItem')
-        ->where('id', '[1-9]\\d{0,}')
-        ->name('publication');
+Route::get('publications/{name}', 'PublicationsController@getOneItem')->name('publication');
 
 // Маршрут для страницы О БЛОГЕ
 Route::get('about-me', function() {
 
     return view('about_me');
 })->name('about-me');
-
 
 
 // Маршрут для страницы ЧТО ПОЧИТАТЬ
@@ -39,7 +36,7 @@ Route::get('what-to-read', function() {
 })->name('what-to-read');
 
 // Маршрут для обработки AJAX страницы ЧТО ПОЧИТАТЬ
-Route::get('what-to-read/ajax', 'AjaxController@getWtrList');
+Route::post('what-to-read/ajax', 'AjaxController@getWtrList');
 
 
 
