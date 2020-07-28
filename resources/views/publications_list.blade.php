@@ -12,7 +12,7 @@
         <div class="publications <?= $publication['type'] ?>">
             <br><hr><br>
 
-            <a href="{{route('publication', [ 'id' => $publication['id'] ])}}">
+            <a href="{{ route('publication', [ 'name' => $publication['name'] ]) }}">
                 <h3 class="title"><?= $publication['title'] ?></h3>
             </a>
 
@@ -29,11 +29,11 @@
         <div class="publications <?= $publication['type'] ?>">
             <br><hr><br>
 
-            <a href="{{route('publication', [ 'id' => $publication['id'] ])}}">
+            <a href="{{ route('publication', [ 'name' => $publication['name'] ]) }}">
                 <img class="imgReviews" src="{{ asset($publication['main_image']) }}">
             </a>
 
-            <a href="{{route('publication', [ 'id' => $publication['id'] ])}}">
+            <a href="{{route('publication', [ 'name' => $publication['name'] ])}}">
                 <h3 class="title"><?= $publication['title'] ?></h3>
             </a>
 
