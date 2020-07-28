@@ -5,9 +5,12 @@
 
 html {
     font-family: "Trebuchet MS", Verdana;
+    font-size: 16px;
 }
 
 body {
+    font-family: "Trebuchet MS", Verdana;
+    font-size: 16px;
     background-image: url(../img/patt3.png);
     background-repeat: repeat;
     background-size: 20%;
@@ -69,19 +72,18 @@ body {
     min-height:700px;
     width:90%;
     padding-top:40px;
-    padding-bottom:20px;
+    padding-bottom:70px;
     padding-left: 5%;
     padding-right: 5%;
     margin:15px auto 0 auto;
 }
 
 #content p{
+    font-size: 1.045rem;
     font-family: "Trebuchet MS", Verdana;
-    font-size: 100%;
-    line-height: 170%;
+    line-height: 160%;
     text-align: justify;
     text-indent: 40px;
-    margin-top: 0;
 }
 
 #content h2 {
@@ -90,7 +92,7 @@ body {
 }
 
 /*Оформление таблиц с книгами*/
-#book_table{
+/* #book_table{
     border: 2px solid white;
     border-spacing: 6px;
     border-collapse: separate;
@@ -116,7 +118,7 @@ td {
 
 td, th {
     padding: 6px 10px 6px 10px;
-}
+} */
 /* Конец оформления таблиц*/
 
 /*Стили для кнопки отправки формы*/
@@ -165,27 +167,12 @@ div.quotes{
 }
 /*End*/
 
-/*Радиокнопки в списке выбора жанра*/
-#content ul li{
-    font: 100% "Trebuchet MS", Tahoma, Verdana; 
-    list-style-type: none;
-    margin: 8px 0;
-}
-
-#content ul label, input[type="radio"]{
-    cursor: pointer;
-    padding: 8px;
-}
-
-#content ul label:hover{
-    background-color: lightblue;
-    border-radius: 5px;
-}
+/* Список жанров WTR */
 /*End*/
 
 /*Фото внутри публикаций*/
 .imgPublications {
-    width: 40%;
+    width: 45%;
     height: auto;
     float: right;
     box-shadow: 0px 0px 5px 1px rgba(100,100,220,1);
@@ -194,7 +181,7 @@ div.quotes{
 
 /*Обзоры*/
 .imgReviews {
-    width: 13rem;
+    width: 12rem;
     height: auto;
     float: left;
     box-shadow: 0px 0px 5px 1px rgba(100,100,220,1);
@@ -357,14 +344,4 @@ textarea {
     font: 400% "Trebuchet MS", Tahoma, Verdana !important ;
     font-style: italic !important;
     color: #187951;
-}
-
-/*Заголовки на страницах*/
-#hello_wtr_result{
-
-}
-
-#hello {
-    text-align: center;
-    line-height: 150% !important;
 }
