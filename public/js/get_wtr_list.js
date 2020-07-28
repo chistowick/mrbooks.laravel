@@ -59,7 +59,7 @@ $(document).ready(function () {
 function getWtrList() {
 
     // Задаем URL
-    const url = new URL('http://mrbooks.laravel/what-to-read/ajax');
+    const url = 'what-to-read/ajax';
 
     // Получаем защитный токен Laravel из скрытого input
     const laravelToken = document.querySelector('input[name="_token"]').value;
