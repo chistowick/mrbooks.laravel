@@ -1,49 +1,109 @@
 "use strict";
 
-// When the whole page has loaded, including styles, pictures and 
-// other resources, set the actions on the buttons
-window.onload = setButtonsAction('.get_wtr_list', 'click', getWtrList);
+let global = {};
 
-// Requests and outputs a 'what-to-read' list
+const wtrSelectList = document.querySelector('#wtr-select-list');
+const recommendationsList = document.querySelector('#recommendations-list');
+const targetDiv = document.querySelector('#wtr-result-table-container');
+
+let oldButton;
+let newButton;
+
+// По клику на кнопке 'Выбрать другой жанр'
+$(document).ready(function () {
+    $('#btn-to-wtr-front').click(function () {
+
+        // Показать страницу выбора жанра
+        showFrontPage();
+
+    });
+});
+
+// По клику на кнопке 'Готово' отправляем AJAX запрос
+$(document).ready(function () {
+    $('.get_wtr_list').click(function () {
+
+        if (!global.idGenre) {
+
+            alert('Вы не выбрали жанр!');
+            return;
+        }
+
+        // Отправляем запрос на поиск рекомендаций и обрабатываем его
+        getWtrList();
+
+    });
+});
+
+// По клику на элемент списка, активируем его, деактивируем другие и запоминаем value активногоэлемента
+$(document).ready(function () {
+    $('.list-group-item').click(function () {
+
+        // Запоминаем старую активную кнопку, и записываем новую
+        oldButton = newButton || null;
+        newButton = $(this);
+
+        // Делаем новую кнопку активной, а старую неактивной
+        if (oldButton) {
+            oldButton.removeClass('active');
+        }
+        newButton.addClass('active');
+
+        // Определяем атрибут value кнопки списка, которая отмечена и записываем его в переменную
+        global.idGenre = $(this).attr('value');
+
+    });
+});
+
+// Запрашиваем и выводим список 'what-to-read'
 function getWtrList() {
 
-    // Get value of checked radio button
-    let idGenre = getCheckedRadioValue();
+    // Задаем URL
+    const url = new URL('http://mrbooks.laravel/what-to-read/ajax');
 
-    // Setting URL and encoding GET-parameters
-    let url = new URL('http://mrbooks.laravel/what-to-read/ajax');
-    url.searchParams.set('id_genre', idGenre);
+    // Получаем защитный токен Laravel из скрытого input
+    const laravelToken = document.querySelector('input[name="_token"]').value;
 
-    // Create a connection
+    // Формируем тело POST-запроса 
+    let postData = new FormData();
+    postData.append('id_genre', global.idGenre);
+    postData.append('_token', laravelToken);
+
+    // Создаем соединение
     let request = new XMLHttpRequest();
 
-    // Request setting
-    request.open('GET', url);
+    // Настраиваем запрос
+    request.open('POST', url);
     request.responseType = 'json';
 
-    // Sending request
-    request.send();
+    // Отправка запроса
+    request.send(postData);
 
-    // If connection error
+    // В случае ошибки
     request.onerror = function () {
         alert(`Ошибка соединения`);
     };
-    // When the server response will be received
+    // Когда ответ сервера будет загружен
     request.onload = function () {
 
-        // Analysis of HTTP response status
+        // Анализируем статус HTTP ответа
         if (request.status != 200) {
             // Print error status and error description
             alert(`Ошибка ${request.status}: ${request.statusText}`);
 
-        } else { // if all OK
+        } else { // Если всё ОК
 
-            // Writing the result to a variable
+            // Записываем ответ в объект для дальнейшей работы
             let responseObj = request.response;
 
-            // Print what-to-read list
-            printWtrList(responseObj);
-//            console.log(responseObj);
+            // Если вернулся пустой массив, выводим сообщение и выходим из функции
+            if (responseObj.length === 0) {
+                alert(`К сожалению, по вашему запросу ничего не найдено`);
+                return;
+            }
+
+            // Формируем то, что должен увидеть пользователь
+            showWtrList(responseObj);
 
             scrollUp(130);
         }
@@ -51,65 +111,19 @@ function getWtrList() {
 
 }
 
-// Set an event listener for each element. (selector, event, action)
-function setButtonsAction(selector, event, action) {
-
-    let elements = document.querySelectorAll(selector);
-    let oneElement;
-
-    // Iterating through elements
-    for (let j = 0; j < elements.length; j++) {
-
-        oneElement = elements[j];
-
-        // Setting actions
-        oneElement.addEventListener(event, action);
-
-    }
-}
-
-// Get value of checked radio button
-function getCheckedRadioValue() {
-    let radioButtons = document.querySelectorAll('input[name=id_genre]');
-
-    for (let k = 0; k < radioButtons.length; k++) {
-        if (radioButtons[k].checked) {
-            return radioButtons[k].value;
-        }
-    }
-
-    return false;
-}
-
-// Set link to front page
-function setPathToFrontPage() {
-
-    // Find all elements of the class .get_wtr_list
-    let pathToFrontPage = document.querySelector('.linkToFrontPage');
-
-    // set actions on click - showFrontPage function
-    pathToFrontPage.addEventListener("click", showFrontPage);
-
-}
-
-// Show front page and hide recommendations list
+// Показываем пользователю список выбора жанра
 function showFrontPage() {
-    // Show div #wtr_select_genre
-    let wtrSelectGenre = document.querySelector('#wtr_select_genre');
-    wtrSelectGenre.style.display = "block";
 
-    // Clear div #recommendations_list
-    clearWtrList();
+    // Показать div #wtr-select-list
+    wtrSelectList.style.display = "block";
+
+    // Очистить targetDiv
+    targetDiv.innerHTML = ``;
+
+    // Скрыть div #recommendations-list
+    recommendationsList.style.display = "none";
 
     scrollUp(130);
-}
-
-// Clear and hide div #recommendations_list
-function clearWtrList(){
-    
-    let recommendationsList = document.querySelector('#recommendations_list');
-    recommendationsList.innerHTML = ``;
-    recommendationsList.style.display = "none";
 }
 
 // Scroll up smoothly
@@ -120,41 +134,41 @@ function scrollUp(top) {
     });
 }
 
-// Print what-to-read list
-function printWtrList(responseObj) {
+// Show what-to-read list
+function showWtrList(responseObj) {
 
-    // Hide div #wtr_select_genre
-    let wtrSelectGenre = document.querySelector('#wtr_select_genre');
-    wtrSelectGenre.style.display = "none";
+    // Hide div #wtr-select-list
+    wtrSelectList.style.display = "none";
 
-    // Show div #recommendations_list
-    let recommendationsList = document.querySelector('#recommendations_list');
+    // Show div #recommendations-list
     recommendationsList.style.display = "block";
 
     let text = ``;
     let lastAuthor = 'anyone';
-    let i = 0;
-
-    // Add greeting
-    text += `<h2 id="hello_wtr_result">Рекомендую почитать следующие книги:</h2>`;
 
     // Add #table_header to text
-    text += `<table id='book_table'>
-                <tr id='first_row'>
-                    <th style='min-width: 150px;'>Название</th>
-                    <th style='min-width: 150px;'>Серия</th>
-                </tr>`;
+    text += `<table class="table table-hover">`;
+    text += `<thead class="thead-light">
+                <tr>
+                    <th scope="col">Название</th>
+                    <th scope="col">Серия</th>
+                </tr>
+            </thead>`;
+    text += `<tbody>`;
 
     // Get object properties and add them to text
     for (let key in responseObj) {
 
+        // Добавляем пустую строку и новую группу с именем нового автора, если он изменился
         if (responseObj[key].author != lastAuthor) {
-            text += `<tr>
-                        <td class='not_row' colspan='2'></td>
+            text += `<tr class="bg-white">
+                        <td colspan='2'></td>
                     </tr>
-                    <tr>
-                        <th class='author_row' colspan='2'>${responseObj[key].author}</th>
-                    </tr>`;
+                    <thead class="thead-light">
+                        <tr class="table-primary">
+                            <th colspan='2'>${responseObj[key].author}</th>
+                        </tr>
+                    </thead>`;
         }
 
         text += `<tr>
@@ -163,24 +177,10 @@ function printWtrList(responseObj) {
                 </tr>`;
 
         lastAuthor = responseObj[key].author;
-        i++;
     }
 
     text += `</table>`;
 
-    // If responseObj is empty - rewrite 'text'
-    if (i == 0) {
-        text = `<h2>К сожалению, по вашему запросу ничего не найдено.</h2>`;
-    }
-
-    // Print 'text'
-    recommendationsList.insertAdjacentHTML("beforeEnd", text);
-
-    // Add link and set action for it
-    let addLink = `<br><br><button type="button" style="margin-left: auto; 
-                            margin-right: auto;" class="form_button linkToFrontPage">
-                            Выбрать другой жанр</button>`;
-    recommendationsList.insertAdjacentHTML("beforeEnd", addLink);
-    
-    setPathToFrontPage();
+    // Print 'text' into targetDiv
+    targetDiv.insertAdjacentHTML("beforeEnd", text);
 }
