@@ -47,7 +47,7 @@ Route::get('quotes', function() {
 })->name('quotes');
 
 // Маршрут для обработки AJAX страницы ЦИТАТЫ
-Route::get('quotes/ajax', 'AjaxController@getRandomQuotes');
+Route::post('quotes/ajax', 'AjaxController@getRandomQuotes');
 
 
 
