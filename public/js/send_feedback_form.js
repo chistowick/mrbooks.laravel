@@ -2,18 +2,18 @@
 
 // When the whole page has loaded, including styles, pictures and 
 // other resources, set the actions on the buttons
-let feedbackButton = document.querySelector('#feedback_button');
+const feedbackButton = document.querySelector('#feedback_button');
 window.onload = feedbackButton.addEventListener("click", sendFeedbackForm);
 
 // Sends the reCAPTCHA token and feedback form data to the handler
 function sendFeedbackForm() {
 
     let subj = document.querySelector('#subj').value;
-    let textArea = document.querySelector('#textArea').value;
+    let textArea = document.querySelector('#text-area').value;
     let recaptchaToken = grecaptcha.getResponse();
     
     // Получаем защитный токен Laravel из скрытого input
-    let laravelToken = document.querySelector('input[name="_token"]').value;
+    const laravelToken = document.querySelector('input[name="_token"]').value;
 
     // Checking the token and form fields
     let ready = readinessCheck(subj, textArea, recaptchaToken);
@@ -23,7 +23,7 @@ function sendFeedbackForm() {
         return;
     }
 
-    let url = 'contacts/ajax';
+    const url = 'contacts/ajax';
 
     // Create POST request data
     let postData = new FormData();
@@ -91,5 +91,5 @@ function readinessCheck(subj, textArea, recaptchaToken) {
 // Clear the form fields
 function clearFormFields() {
     document.querySelector('#subj').value = '';
-    document.querySelector('#textArea').value = '';
+    document.querySelector('#text-area').value = '';
 }
