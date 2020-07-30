@@ -21,7 +21,7 @@ $(document).ready(function () {
 
 // По клику на кнопке 'Готово' отправляем AJAX запрос
 $(document).ready(function () {
-    $('.get_wtr_list').click(function () {
+    $('#get_wtr_list').click(function () {
 
         if (!global.idGenre) {
 

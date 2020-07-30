@@ -50,9 +50,9 @@
 
     <form>{{csrf_field()}}</form>
 
-    <div class="row justify-content-center">
-        <div class="col-11 col-sm-9 col-md-6">
-            <button type="button" class="form_button get_wtr_list m-auto">
+    <div class="row text-center">
+        <div class="col">
+            <button type="button" class="btn-lg btn-success" id="get_wtr_list">
                 Готово</button>
         </div>
     </div>
@@ -75,9 +75,9 @@
         </div>
     </div>
 
-    <div class="row justify-content-center">
+    <div class="row text-center">
         <div class="col">
-            <button type="button" class="form_button m-auto" id="btn-to-wtr-front">
+            <button type="button" class="btn-lg btn-success" id="btn-to-wtr-front">
                 Выбрать другой жанр</button>
         </div>
     </div>
@@ -89,7 +89,6 @@
 @endsection
 
 @section('scripts')
-
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/get_wtr_list.js') }}"></script>
 @endsection
