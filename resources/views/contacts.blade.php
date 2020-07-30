@@ -4,34 +4,57 @@
 @section('content')
 <!--content start-->
 
-<!--Settings for reCAPTHA-->
-<?php $data_sitekey = '6LfjG_cUAAAAAJzmTo8JzPwqM2wC3C7ZE1Lezhzn'; ?>
-
-<h3 style="text-align: center;">Если у Вас есть вопрос или предложение,
-    пожалуйста, свяжитесь со мной через эту форму</h3>
-
-<div id="feedback_block">
-
-    <div class="feedback_elem"><label for="subj">Тема письма: </label>
-        <input type="text" id="subj" name="feedback_message_subject" placeholder="Укажите тему письма" maxlength="100">
-    </div>
-
-    <div class="feedback_elem"><label for="textArea">Ваше сообщение: </label>
-        <textarea id="textArea" name="feedback_message" rows="10" maxlength="2000" placeholder="Введите текст вашего сообщения"></textarea>
-    </div>
-
-    <div id="wrap_recaptha_and_button">
-        <div class="g-recaptcha" data-sitekey="<?= $data_sitekey ?>"></div>
-
-        <button class="form_button" id="feedback_button" type="button" value="Отправить">
-            Отправить</button>
+<div class="row justify-content-center">
+    <div class="col-12 col-sm-10 col-md-10 mb-4">
+        <h3 class="text-center">Если у Вас есть вопрос или предложение, пожалуйста, свяжитесь со мной через эту форму</h3>
     </div>
 </div>
 
-<form>{{csrf_field()}}</form>
+<div class="row justify-content-center no-gutters">
+    <div class="col-12 col-sm-10 col-md-8 col-lg-7">
+        <div class="card">
+            <div class="card-body">
 
-<div id="quill_block"><img id="quill" src="{{asset('/img/quill.png')}}"></div>
-<div style="clear: both"></div>
+                <div class="form-group row no-gutters">
+                    <label class="col-12 col-form-label" for="subj">Тема письма: </label>
+
+                    <div class="col-12">
+                        <input class="form-control" type="text" id="subj" name="feedback_message_subject" placeholder="Укажите тему письма" maxlength="100" required autofocus>
+                    </div>
+                </div>
+
+                <div class="form-group row no-gutters">
+                    <label class="col-12 col-form-label" for="text-area">Ваше сообщение: </label>
+
+                    <div class="col-12">
+                        <textarea class="form-control" id="text-area" name="feedback_message" rows="10" maxlength="2000" placeholder="Введите текст вашего сообщения" required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group row no-gutters">
+                    <div class="col-12">
+                        <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
+                    </div>
+                </div>
+
+                <div class="form-group row no-gutters">
+                    <div class="col-12">
+                        <button class="btn-lg btn-success" id="feedback_button" type="button">Отправить</button>
+                    </div>
+                </div>
+
+                <form>{{ csrf_field() }}</form>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-5 d-none d-lg-block">
+        <div id="quill_block">
+            <img id="quill" src="{{asset('/img/quill.png')}}">
+        </div>
+    </div>
+</div>
 
 <!--content end-->
 
