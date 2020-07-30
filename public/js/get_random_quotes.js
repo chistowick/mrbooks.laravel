@@ -1,22 +1,35 @@
 "use strict";
 
-// Set an event listener for each element. (selector, event, action)
-window.onload = setButtonsAction('.get_random_quotes', 'click', getRandomQuotes);
+// Определяем блок, в который будем выводить цитаты
+const quotesTargetDiv = document.querySelector('#quotes-target-div');
+
+// Кнопка 'Показать пять случайных цитат'
+const btnGetRandomQuotes = document.querySelector('#get_random_quotes');
+
+// Устанавливаем обработчик клика на кнопку 'Показать пять случайных цитат'
+window.onload = btnGetRandomQuotes.addEventListener("click", getRandomQuotes);
 
 // Requests and outputs a set of random quotes
 function getRandomQuotes() {
 
-    let url = 'quotes/ajax';
+    const url = 'quotes/ajax';
 
-    // Create a connection
+    // Получаем защитный токен Laravel из скрытого input
+    const laravelToken = document.querySelector('input[name="_token"]').value;
+
+    // Формируем тело POST-запроса 
+    let postData = new FormData();
+    postData.append('_token', laravelToken);
+
+    // Создаем соединение
     let request = new XMLHttpRequest();
 
     // Request setting
-    request.open('GET', url);
+    request.open('POST', url);
     request.responseType = 'json';
 
     // Sending request
-    request.send();
+    request.send(postData);
 
     // If connection error
     request.onerror = function () {
@@ -45,57 +58,34 @@ function getRandomQuotes() {
 
 }
 
-// Set an event listener for each element. (selector, event, action)
-function setButtonsAction(selector, event, action) {
-
-    let elements = document.querySelectorAll(selector);
-    let oneElement;
-
-    // Iterating through elements
-    for (let j = 0; j < elements.length; j++) {
-
-        oneElement = elements[j];
-
-        // Setting actions
-        oneElement.addEventListener(event, action);
-
-    }
-}
-
 // Print the content
 function printQuotes(responseObj) {
 
-    // Clear div content
-    document.querySelector('#content').innerHTML = ``;
+    // Clear div #quotes-target-div
+    quotesTargetDiv.innerHTML = ``;
 
     // Set 'hello'
-    let hello = `<h2 id="hello">Лучше, чем цитаты, могут быть только случайно отобранные цитаты.
-                            Жмякните на кнопку!</h2>`;
+    const hello = `<div class="row justify-content-center mb-3">
+                        <div class="col-8 col-sm-12">
+                            <h2>Пять случайно отобранных цитат</h2>
+                        </div>
+                    </div>`;
 
-    let addButton = `<button type="button" style="margin-left: auto; 
-                margin-right: auto;" class="form_button get_random_quotes">
-                Показать пять случайных цитат</button>`;
+    // Add 'hello' to #quotes-target-div
+    quotesTargetDiv.insertAdjacentHTML("afterBegin", hello);
 
-    // Add 'hello' and a first button
-    document.querySelector('#content').insertAdjacentHTML("afterBegin", hello);
-    document.querySelector('#hello').insertAdjacentHTML("afterEnd", addButton);
-
-    let text;
+    let text = ``;
 
     // Iterate the object's properties and insert quotes in HTML
     for (let key in responseObj) {
-        text = `<div class="quotes">${responseObj[key].quote}<br>`;
+        text += `<div class="quotes">${responseObj[key].quote}<br>`;
         text += `<p class="source">${responseObj[key].bookname}</p>`;
-        text += `<p class="source">${responseObj[key].author}</p></div>`;
-
-        document.querySelector('.form_button').insertAdjacentHTML("afterEnd", text);
+        text += `<p class="source">${responseObj[key].author}</p>`;
+        text += `</div>`;
     }
 
-    // Add a second button
-    document.querySelector('#content').insertAdjacentHTML("beforeEnd", addButton);
-
-    // Set the actions for each buttons
-    setButtonsAction('.get_random_quotes', 'click', getRandomQuotes);
+    // Insert text to the end of #quotes-target-div
+    quotesTargetDiv.insertAdjacentHTML("beforeEnd", text);
 }
 
 // Scroll up smoothly
