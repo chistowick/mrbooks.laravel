@@ -19,7 +19,7 @@
 
 <?php if ($one_publication['type'] == 'Reviews') : ?>
 
-    <img class="imgReviews" src="/<?= $one_publication['main_image'] ?>">
+    <img class="img-one-review mr-4 mb-2" src="/<?= $one_publication['main_image'] ?>">
 
     <h2><?= $one_publication['title'] ?></h2>
 
@@ -29,9 +29,9 @@
 
 <?php endif; ?>
     
-    <h3 class="back_href">
+    <h4 class="back_href">
         <a href="{{ route('publications-list')}}">Вернуться на главную страницу</a>
-    </h3>
+    </h4>
 
 <!--content end-->
 @endsection
