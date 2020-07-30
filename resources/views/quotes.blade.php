@@ -5,11 +5,24 @@
 @section('content')
 
 <!--content start-->
-<h2 id="hello">Лучше, чем цитаты, могут быть только случайно отобранные цитаты.
-    Жмякните на кнопку!</h2>
+<!-- Div, содержимое которого переписывается скриптом js -->
+<div id="quotes-target-div">
+    <div class="row mb-3">
+        <div class="col">
+            <h2>Лучше, чем цитаты, могут быть только случайно отобранные цитаты.
+                Жмякните на кнопку!</h2>
+        </div>
+    </div>
+</div>
 
+<form>{{ csrf_field() }}</form>
 
-<button type="button" style="margin-left: auto; margin-right: auto;" class="form_button get_random_quotes">Показать пять случайных цитат</button>
+<div class="row text-center">
+    <div class="col">
+        <button type="button" class="btn-lg btn-success" id="get_random_quotes">
+            Показать пять случайных цитат</button>
+    </div>
+</div>
 
 <!--content end-->
 
