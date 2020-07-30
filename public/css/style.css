@@ -178,43 +178,14 @@ ul.liked li {
 }
 
 /*Форма обратной связи*/
-#feedback_block{
-    width: 50%;
-    float: left;
-    padding-top: 30px;
-}
 
-#quill_block{
-    width: 45%;
-    float: right;
-    padding-top: 30px;
-}
-#wrap_recaptha_and_button {
-    width: 100%;
-    padding: 0px;
-    text-align:center;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
-}
+
 /*Блок с reCAPTCHA*/
 .g-recaptcha {
-    margin-bottom: 8px;
-}
 
-.feedback_elem label {
-    display: block;
-    margin-top: 10px;
-}
-
-.feedback_elem input {
-    display: block;
 }
 
 .feedback_elem input, textarea {
-    margin-top: 5px;
-    margin-bottom: 5px;
     padding: 8px;
     border: 2px solid lightgray;
     border-radius: 10px;
@@ -228,41 +199,12 @@ textarea:focus{
     border-radius: 10px;
 }    
 textarea {
-    width: calc(100% - 18px);
     resize: none;
 }
-
-#feedback_button {
-    height: 100%;
-    vertical-align:bottom;
-}
-
-#subj {
-    box-sizing: border-box;
-    width: 100%;
-}
 /*End*/
 
-/*Кнопки на сайте*/
-.form_button {
-    display: block;
-    padding: 10px 20px !important;
-    border-radius: 10px;
-    font: 120% "Trebuchet MS", Tahoma, Verdana !important ;
-    background-color: #6bdb96;
-    min-width: 50px;
-    min-height: 40px;
-    border: none;
-    cursor:pointer;
-}
-
-.form_button:hover {
-    background-color: #77f7a8;
-}
-/*End*/
 
 /*Оформление страницы 404*/
-
 #div_404{
     margin-top: 60px; 
 }
@@ -284,4 +226,13 @@ textarea {
     font: 400% "Trebuchet MS", Tahoma, Verdana !important ;
     font-style: italic !important;
     color: #187951;
+}
+
+/* Отменить рамки у кнопок после нажатия */
+button:active, button:focus {
+    outline: none;
+}
+
+button::-moz-focus-inner {
+    border: 0;
 }
