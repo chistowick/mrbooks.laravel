@@ -40,6 +40,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <!-- Шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
+
     <!-- Styles of Bootstrap-->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -57,8 +60,8 @@
         <!-- Header -->
         <div class="row no-gutters justify-content-center">
             <div class="col col-md-11 col-lg-10">
-                <div id="header">
-                    <img src="{{ asset('img/HeaderBook.png') }}" alt="МОЙ ЧИТАТЕЛЬСКИЙ ДНЕВНИК">
+                <div id="header" class="text-center">
+                    <h1>Mr. Books</h1>
                 </div>
             </div>
         </div>
