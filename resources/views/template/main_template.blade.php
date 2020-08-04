@@ -77,7 +77,7 @@
 
         <!-- Content area -->
         <div class="row no-gutters justify-content-center">
-            <div class="col col-md-11 col-lg-10" id="content">
+            <div class="col col-md-11 col-lg-10 text-left" id="content">
 
                 @yield('content')
 

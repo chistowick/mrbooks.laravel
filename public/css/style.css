@@ -230,3 +230,7 @@ button:active, button:focus {
 button::-moz-focus-inner {
     border: 0;
 }
+
+.no-indent {
+    text-indent: 0px !important;
+}
