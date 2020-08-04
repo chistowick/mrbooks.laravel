@@ -13,7 +13,7 @@ class PublicationsController extends Controller
      */
     public function getList() {
         
-        $publications_list = Publication::all();
+        $publications_list = Publication::orderBy('id', 'desc')->get();
         
         return view('publications_list', ['publications_list' => $publications_list]);
     }
