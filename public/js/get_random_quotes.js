@@ -52,7 +52,7 @@ function getRandomQuotes() {
             printQuotes(responseObj);
 
             // Scroll up
-            scrollUp(130);
+            scrollUp();
         }
     };
 
@@ -89,9 +89,13 @@ function printQuotes(responseObj) {
 }
 
 // Scroll up smoothly
-function scrollUp(top) {
+function scrollUp() {
+
+    // Получаем текущую высоту #header
+    let headerHeight = document.getElementById('header').offsetHeight;
+
     window.scrollTo({
-        top: top,
+        top: headerHeight,
         behavior: "smooth"
     });
 }

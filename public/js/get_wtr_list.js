@@ -123,13 +123,17 @@ function showFrontPage() {
     // Скрыть div #recommendations-list
     recommendationsList.style.display = "none";
 
-    scrollUp(130);
+    scrollUp();
 }
 
 // Scroll up smoothly
-function scrollUp(top) {
+function scrollUp() {
+
+    // Получаем текущую высоту #header
+    let headerHeight = document.getElementById('header').offsetHeight;
+
     window.scrollTo({
-        top: top,
+        top: headerHeight,
         behavior: "smooth"
     });
 }
